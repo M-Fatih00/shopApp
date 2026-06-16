@@ -1,0 +1,88 @@
+@model AspNetUI.DTOs.User.EditUserDTO
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="row">
+    <div class="col">
+        <div class="card shadow">
+
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">Kullanıcı Güncelle</h5>
+                <a asp-action="Index" class="btn btn-sm btn-primary">Liste</a>
+            </div>
+
+            <div class="card-body">
+
+                <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+                <form asp-action="Edit" method="post">
+
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="mb-3">
+                        <label asp-for="AdSoyad" class="form-label"></label>
+                        <input asp-for="AdSoyad" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="UserName" class="form-label"></label>
+                        <input asp-for="UserName" class="form-control" />
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                    </div>
+
+                    <!--  ŞİFRE -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <strong>Parola Güncelle (Opsiyonel)</strong>
+                        </div>
+                        <div class="card-body">
+
+                            <div class="mb-3">
+                                <label asp-for="Password" class="form-label"></label>
+                                <input asp-for="Password" class="form-control" />
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="ConfirmPassword" class="form-label"></label>
+                                <input asp-for="ConfirmPassword" class="form-control" />
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- ROLLER -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <strong>Roller</strong>
+                        </div>
+                        <div class="card-body">
+                            @foreach(var role in Model.AvailableRoles!)
+                            {
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input"
+                                           name="SelectedRoles"
+                                           value="@role"
+                                           id="@role"
+                                           @(Model.SelectedRoles != null && Model.SelectedRoles.Contains(role) ? "checked" : "") />
+                                    <label for="@role" class="form-check-label">@role</label>
+                                </div>
+                            }
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-success">Kaydet</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @await Html.PartialAsync("_ValidationScriptsPartial")
+}

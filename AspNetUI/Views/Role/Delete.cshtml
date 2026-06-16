@@ -1,0 +1,46 @@
+@model AspNetUI.DTOs.Role.EditRoleDTO
+
+@{
+    Layout = "_AdminLayout";
+}
+
+@if (Model == null)
+{
+    <div class="alert alert-danger">Rol bilgisi yüklenemedi.</div>
+}
+else
+{
+    <div class="row">
+        <div class="col text-center">
+            <div class="card shadow">
+                <div class="card-body text-center">
+                    <p class="lead">
+                        <strong>@Model.RoleAdi</strong> isimli rolü silmek istiyor musunuz?
+                    </p>
+
+                    <form asp-action="DeleteConfirm" method="post">
+                        <input type="hidden" name="id" value="@Model.Id">
+
+                        @* ViewBag.Users null kontrolü ekledik *@
+                        @if (ViewBag.Users != null && ((IEnumerable<object>)ViewBag.Users).Any())
+                        {
+                            <div class="alert alert-warning">
+                                <p>Bu role sahip kullanıcılar var, önce onları çıkarın:</p>
+                                @foreach (var item in ViewBag.Users)
+                                {
+                                    <p class="small">@item</p>
+                                }
+                            </div>
+                        }
+                        else
+                        {
+                            <button type="submit" class="btn btn-danger">Sil</button>
+                        }
+
+                        <a asp-action="Index" class="btn btn-primary">İptal</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+}

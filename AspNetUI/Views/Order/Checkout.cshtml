@@ -1,0 +1,159 @@
+@model AspNetUI.DTOs.Order.CreateOrderDTO
+
+@section Bar {
+    <section class="bg-primary p-3">
+        <div class="container">
+            <nav>
+                <ol class="breadcrumb mb-0">
+                    <li class="breadcrumb-item">
+                        <a href="#">Anasayfa</a>
+                    </li>
+                    <li class="breadcrumb-item">
+                        Siparişi Tamamla
+                    </li>
+                </ol>
+            </nav>
+        </div>
+    </section>
+}
+
+<section class="mt-3">
+    <div class="container">
+
+        <!-- TEK FORM -->
+        <form method="post" asp-controller="Order" asp-action="Checkout">
+
+            <div asp-validation-summary="All" class="text-danger mb-3"></div>
+
+            <div class="row">
+
+                <!-- SOL TARAF -->
+                <div class="col-md-8">
+
+                    <!-- TESLİMAT -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <h2 class="h6 mb-0">Teslimat Bilgileri</h2>
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="mb-3">
+                                <label asp-for="AdSoyad"></label>
+                                <input asp-for="AdSoyad" class="form-control" />
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label asp-for="Sehir"></label>
+                                    <input asp-for="Sehir" class="form-control" />
+                                </div>
+                                <div class="col">
+                                    <label asp-for="Telefon"></label>
+                                    <input asp-for="Telefon" class="form-control" />
+                                </div>
+                                <div class="col">
+                                    <label asp-for="PostaKodu"></label>
+                                    <input asp-for="PostaKodu" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="AdresSatiri"></label>
+                                <textarea asp-for="AdresSatiri" class="form-control"></textarea>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="SiparisNotu"></label>
+                                <textarea asp-for="SiparisNotu" class="form-control"></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- ÖDEME -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="h6 mb-0">Ödeme Bilgileri</h2>
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label asp-for="CartName"></label>
+                                    <input asp-for="CartName" class="form-control" />
+                                </div>
+                                <div class="col">
+                                    <label asp-for="CartNumber"></label>
+                                    <input asp-for="CartNumber" class="form-control" />
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <label asp-for="CartExpirationYear"></label>
+                                    <input asp-for="CartExpirationYear" class="form-control" />
+                                </div>
+                                <div class="col">
+                                    <label asp-for="CartExpirationMonth"></label>
+                                    <input asp-for="CartExpirationMonth" class="form-control" />
+                                </div>
+                                <div class="col">
+                                    <label asp-for="CartCVV"></label>
+                                    <input asp-for="CartCVV" class="form-control" />
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- SAĞ TARAF -->
+                <div class="col-md-4">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h2 class="h6 mb-0">Sipariş Özeti</h2>
+                        </div>
+
+                        <div class="card-body">
+
+                            @if (ViewBag.Cart?.CartItems?.Count > 0)
+                            {
+                                @foreach (var item in ViewBag.Cart.CartItems)
+                                {
+                                    <div class="d-flex justify-content-between mb-2">
+                                        <span>@item.UrunAdi (x @item.Miktar)</span>
+                                        <span>@((item.Fiyat* item.Miktar).ToString("0,0")) ₺</span>
+                                    </div>
+                                }
+
+                                <hr />
+
+                                <div class="d-flex justify-content-between fw-bold">
+                                    <span>Toplam</span>
+                                    <span>@ViewBag.Cart.Toplam.ToString("0,0") ₺</span>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="alert alert-warning">
+                                    Sepet bilgisi yüklenemedi.
+                                </div>
+                            }
+
+                            <button type="submit" class="btn btn-primary w-100 mt-3">
+                                Siparişi Tamamla
+                            </button>
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </form>
+    </div>
+</section>
