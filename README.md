@@ -104,4 +104,4 @@ CVV: 123
 
 Bu proje benim için MVC'den Web API mimarisine geçiş sürecini temsil ediyor. İlk projemde sadece MVC ile çalışırken, burada backend ve frontend'i ayırarak gerçek bir API mimarisinin nasıl kurulduğunu, authentication'ın nasıl yönetildiğini ve bu iki yapının birbirine nasıl bağlandığını uygulamalı olarak öğrendim.
 
-Şu an bir sonraki hedefim olarak frontend'de React + Redux Toolkit, backend'de ise Web API kullanarak çok daha kapsamlı ve detaylı bir e-ticaret projesi geliştiriyorum. Bu projede gerçek hayattaki bir e-ticaret sitesine birebir uyumlu olmasına ve tam responsive bir tasarıma sahip olmasına özellikle önem veriyorum.
+Şu an bir sonraki hedefim olarak frontend'de React + Redux Toolkit, backend'de ise Web API kullanarak çok daha kapsamlı ve detaylı bir e-ticaret projesi geliştiriyorum. Bu hedeflediğim projede gerçek hayattaki bir e-ticaret sitesine birebir uyumlu olmasına ve tam responsive bir tasarıma sahip olmasına özellikle önem veriyorum.
