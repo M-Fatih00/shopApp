@@ -50,6 +50,55 @@ Kimlik Doğrulama: ASP.NET Core Identity + JWT
 Veritabanı: SQLite, Entity Framework Core
 Ödeme: Iyzico (sandbox) — test kartlarıyla ödeme simülasyonu yapılabiliyor
 
+Çalıştırmak İçin
+
+.NET 9 SDK kurulu olmalı. Bir de migration'ları çalıştırmak için EF Core aracı:
+
+dotnet tool install --global dotnet-ef
+
+Sonra:
+
+git clone https://github.com/M-Fatih00/shopApp.git
+cd shopApp
+
+E-posta ve ödeme bilgilerini koda gömmedim, user-secrets'ta tutuyorum. Kendi değerlerini girmen gerekiyor (komutları AspNetAPI klasörü içinde çalıştır):
+
+dotnet user-secrets init
+dotnet user-secrets set "Email:Username" "ornek@gmail.com"
+dotnet user-secrets set "Email:Password" "gmail-uygulama-sifresi"
+dotnet user-secrets set "PaymentAPI:APIKey" "sandbox-api-key"
+dotnet user-secrets set "PaymentAPI:SecretKey" "sandbox-secret-key"
+
+Iyzipay sandbox anahtarlarını sandbox-merchant.iyzipay.com adresinden ücretsiz alabilirsin.
+
+Veritabanını oluştur ve API'yi çalıştır:
+
+dotnet ef database update
+dotnet run
+
+API çalışır durumdayken, ayrı bir terminalde AspNetUI klasörüne geçip MVC projesini de başlat:
+
+cd ../AspNetUI
+dotnet run
+
+Demo Hesaplar
+
+Uygulama ilk açıldığında bu hesaplar otomatik oluşuyor:
+
+
+Admin: admin@gmail.com / 123456 / admin
+Müşteri: customer@gmail.com / 123456 / customer
+
+
+Ödeme Testi
+
+Sandbox olduğu için gerçek kart gerekmez. Test kartı:
+
+
+Kart no: 5528 7900 0000 0008
+Son kullanma: 12/30
+CVV: 123
+
 
 !! Not:
 
